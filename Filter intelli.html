@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title> ICONIC FILTER </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            .link{
+                text-decoration:none;
+                margin-top:10px;
+            }
+        </style>
+    </head>
+    <body>
+     <div class="parentContainer" style="display:flex;gap:20px;">
+        <div class="navbar" style="height:100%;">
+            
+            <form>
+                <input type="text" id="search" placeholder="Search your Fav With Name" >
+            </form>
+            <ul class="list" style="list-style:none">
+                <div class="link" data-cat="all"><button><li>All</li></button></div>
+                <div class="link" data-cat="HardShips"> <button><li>HardShips</li></button></div>
+                <div class="link" data-cat="LifeChanging"><button><li>LifeChanging</li></button> </div>
+                <div class="link" data-cat="Growth"><button><li>Growth</li></button></div>
+            </ul>
+
+            <div>
+                <input type="range" class="range" min="0" max="100" value="99">
+                <label for="range">Rating</label>
+                <p id="val"></p>
+                <button id="refresh"> LatestData</button>
+            </div>
+        </div>
+
+        <div class="container" style="display:flex; flex-wrap:wrap;justify-content:center;gap:20px">
+            <div class="item" style="width:250px; height:330px">
+                
+                <img src="./images/Area.jpg" style="text-align:center; " width="200px" height="250px">
+                <h5> Area     </h5>
+                <p>  Level 85 </p>
+            </div>
+        </div>
+     </div>
+   
+     <script src="./Filter.js"></script>
+    </body>
+
+</html>
+
+
+
