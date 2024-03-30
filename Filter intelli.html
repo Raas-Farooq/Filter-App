@@ -27,7 +27,15 @@
                 <input type="range" class="range" min="0" max="100" value="99">
                 <label for="range">Rating</label>
                 <p id="val"></p>
-                <button id="refresh"> LatestData</button>
+                <div style="display:flex;gap:5px">
+                    <input type="text" id="searchId" placeholder="Enter exact Id To Remove" style="width:70%" >
+                    <button id="delete"> Remove </button>
+                </div>
+                <span id="your"></span>
+                <div style="margin:10px 0">
+                    <button id="add" style="margin-top:20px"> AddItem </button>
+                </div>
+                <button id="refresh" style="margin-top:20px"> LoadAll</button>
             </div>
         </div>
 
@@ -45,6 +53,4 @@
     </body>
 
 </html>
-
-
 

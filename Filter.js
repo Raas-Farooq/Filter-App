@@ -6,6 +6,7 @@ let allData;
 
 
 document.addEventListener('DOMContentLoaded', e => {
+    yourId.textContent = "";
     fetch('http://localhost:3500/start').then(
         response => response.json()
     ).then
@@ -19,39 +20,83 @@ document.addEventListener('DOMContentLoaded', e => {
 })
 // const url = 'https://course-api.com/react-tours-project';
 
+let remId;
+const searchId = document.querySelector("#searchId");
+const yourId = document.querySelector("#your");
+
+searchId.addEventListener('input', e => {
+    remId = e.target.value;
+    yourId.textContent = "";
+    fetch(`http://localhost:3500/searchId?id=${remId}`).then(
+        response => response.json()).
+        then(data => {
+            console.log("data: ", data);
+            showItems(data);
+        }).catch(err => console.log('look On Yourself Are you deliberate: ', err))
+});
+
+//deleting Item with Id
+const del = document.querySelector("#delete");
+del.addEventListener('click', e => {
+    yourId.textContent = "You Entered ID " + remId;
+    searchId.value = '';
+    fetch(`http://localhost:3500/deleteItem?id=${remId}`,{
+        method:'DELETE'
+    }).then(response => response.json()).
+    then(data => {
+        console.log(" Check the dataz: ", data);
+    }).catch(err => console.log( "Be Consious: ", err));
+})
+
+
+//LoadAll Data 
 const refresh = document.querySelector("#refresh");
 
 refresh.addEventListener('click', e => {
-    
-    const newData = [{
-        id:4354,
-        category:'Growth',
-        name:'Privilege',
-        
-        img:'./images/Privilege%20of%20Strong.jpg',
-        rating:100
-    }];
-
-    fetch(`http://localhost:3500/loading`, {
-        method: 'POST',
-        Headers :{
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(newData)
-        
-    }).then(response => response.json()).then
-    (data => {
-        console.log(data);
-        // console.log(data);
-    }).catch(err => console.log("Love Errs: ", err));
-    
+    searchId.value = '';
+    yourId.textContent = "";
+    fetch('http://localhost:3500/loadAllData').then(response => response.json()).then(
+        data => {
+            console.log("You can See my Data: ", data);
+            showItems(data);
+        }
+    ).catch(err => console.log("ARe you deliberate: ", err));
 })
+ 
+//Adding New Item
+const add = document.querySelector("#add");
+add.addEventListener('click', e => {
+    yourId.textContent = "";
+    searchId.value = '';
+    const newItem = [{
+        id:1234,
+        category:'HardShips',
+        name:'Independance',
+        img:'./images/Privilege.jpg',
+        rating:94  
+    }]
+    fetch('http://localhost:3500/addingItem', {
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(newItem)
+    }).then(response => response.json()).then(
+        data => {
+            console.log("You can See my Data: ", data);
+        }
+    ).catch(err => console.log("ARe you deliberate: ", err));
+})
+ 
 
 
 const allLinks = document.querySelectorAll('.link');
 
 allLinks.forEach(link => {
+    
     link.addEventListener('click', e => {
+        searchId.value = '';
+        yourId.textContent = "";
         setVal(100);
         const genre = link.dataset.cat;
         fetch(`http://localhost:3500/handleFilter?genre=${genre}`).then
@@ -69,6 +114,8 @@ allLinks.forEach(link => {
 const searchInput = document.querySelector("#search");
 
 searchInput.addEventListener('input', e => {
+    searchId.value = '';
+    yourId.textContent = "";
     const value = e.target.value;
     fetch(`http://localhost:3500/activeSearch?searching=${value}`).
     then(response => response.json()).then(
@@ -82,6 +129,8 @@ searchInput.addEventListener('input', e => {
 const range = document.querySelector(".range");
 
 range.addEventListener('input', e => {
+    searchId.value = '';
+    yourId.textContent = "";
     const value = range.value;
     console.log("value: ", value);
     fetch(`http://localhost:3500/handleRange?range=${value}`).then(
