@@ -117,9 +117,8 @@ app.post('/addingItem', async (req,res) => {
         console.log('Received body: ', req.body );
         const item =req.body;
         const id = item[0].id;
-        console.log("data: ", id);
+        console.log("id: ", id);
         const data = await FilterTough.find({id});
-        console.log("data: ", data);
         if(data.length > 0){
             console.log("Already Exist", data);
             const allPics = await FilterTough.find({});
